@@ -8,7 +8,7 @@ describe("Main route", () => {
 
     expect(response.status).toBe(200);
   });
-    it("should return 200", async () => {
+    it("should return proof of life", async () => {
     const response = await request(app)
       .get("/")
 
