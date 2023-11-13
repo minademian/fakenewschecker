@@ -4,20 +4,21 @@ import crypto, { BinaryLike } from 'crypto';
 
 import config from './services/config';
 import GraphApi from './services/graph-api';
+let profile = require('./services/profile.js');
 
 const app = express();
 
 app.use(json({ verify: verifyRequestSignature }));
 
 function verifyRequestSignature(req: Request, _res: Response, buf: Buffer) {
-  var signature = req.headers['x-hub-signature'];
+  const signature = req.headers['x-hub-signature'];
 
   if (!signature) {
     console.warn(`Couldn't find "x-hub-signature" in headers.`);
   } else {
-    var elements = (signature as string).split('=');
-    var signatureHash = elements[1];
-    var expectedHash = crypto
+    const elements = (signature as string).split('=');
+    const signatureHash = elements[1];
+    const expectedHash = crypto
       .createHmac('sha1', config.appSecret as BinaryLike)
       .update(buf)
       .digest('hex');
@@ -40,8 +41,7 @@ app.get('/profile', (req: Request, res: Response) => {
     // change back to https when going live
     res.status(200).send('ERROR - need a proper API_URL configured.');
 
-  var Profile = require('./services/profile.js');
-  Profile = new Profile();
+  const Profile = new profile();
 
   // Check if a token and mode is in the query string of the request
   if (mode && token) {
