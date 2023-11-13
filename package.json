@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest  --forceExit --detectOpenHandles  --watchAll --maxWorkers=1",
-    "build": "npx tsc",
+    "clean": "rimraf dist",
+    "build": "npm run clean && npx tsc",
     "start": "node dist/server.js",
     "dev": "npm run build && concurrently \"npx tsc --watch\" \"nodemon -q dist/server.js\""
   },
