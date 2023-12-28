@@ -9,40 +9,47 @@ const ENV_VARS = [
   'APP_SECRET',
   'VERIFY_TOKEN',
   'APP_URL',
+  'APP_PORT',
 ];
 
+type Origin = string | boolean | RegExp;
 type EnvVar = string | undefined;
 type Port = string | number | undefined;
 
 type Config = {
+  host: EnvVar;
   GoogleApiDomain: EnvVar;
   GoogleApiVersion: EnvVar;
   GoogleClientSecret: EnvVar;
   GoogleClientId: EnvVar;
-  appUrl: EnvVar;
+  appPort: Port;
   port: Port;
+  appUrl: Origin;
   apiUrl: EnvVar;
+  GoogleApiUrl: EnvVar;
   redirectUri: EnvVar;
-  whitelistedDomains: EnvVar[];
   checkEnvVariables: Function;
 };
 
 const config: Config = {
-  GoogleApiDomain: 'https://graph.facebook.com',
-  GoogleApiVersion: 'v11.0',
+  appPort: process.env.APP_PORT || 3000,
+  host: 'http://localhost',
+  GoogleApiDomain: 'https://www.googleapis.com/auth',
+  GoogleApiVersion: '',
   GoogleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
   GoogleClientId: process.env.GOOGLE_CLIENT_ID,
   redirectUri: process.env.GOOGLE_REDIRECT_URI,
-  appUrl: process.env.APP_URL,
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 8000,
 
+  get appUrl(): Origin {
+    return `${this.host}:${this.appPort}`;
+  },
   get apiUrl() {
-    return `${this.GoogleApiDomain}/${this.GoogleApiVersion}`;
+    return `${this.host}:${this.port}`;
   },
-  get whitelistedDomains() {
-    return [this.appUrl];
+  get GoogleApiUrl() {
+    return `${this.GoogleApiDomain}/`;
   },
-
   checkEnvVariables: function () {
     ENV_VARS.forEach(function (key) {
       if (!process.env[key]) {

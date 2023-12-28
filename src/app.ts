@@ -1,7 +1,8 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { routes } from './routes';
+import config from './services/config';
 
 const app = express();
 
@@ -9,14 +10,13 @@ const json = bodyParser.json();
 
 app.use(json);
 
-/* app.use(
+app.use(
   cors({
     credentials: true,
-    origin: ['http://localhost:3000'],
+    origin: [config.appUrl],
   })
-); */
+);
 
-/* app.use('/', IndexRouter); */
 app.use('/', routes);
 
 export default app;
