@@ -1,14 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+
 import { routes } from './routes';
 import config from './services/config';
+import { googleAuth } from './middlewares/google.middleware';
 
 const app = express();
 
-const json = bodyParser.json();
-
-app.use(json);
+app.use(bodyParser.json());
 
 app.use(
   cors({
@@ -17,6 +17,6 @@ app.use(
   })
 );
 
-app.use('/', routes);
+app.use(`/${config.apiPrefix}`, googleAuth, routes);
 
 export default app;
