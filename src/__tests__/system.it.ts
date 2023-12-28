@@ -23,5 +23,9 @@ describe('System routes', () => {
     const response = await req.get('/ping');
 
     expect(response.body).toStrictEqual({ alive: true });
-  }, 30000);
+  });
+});
+
+describe('Auth routes', () => {
+  it('authorized route should return success', () => {});
 });
