@@ -5,6 +5,7 @@ dotenv.config();
 const ENV_VARS = [
   'GOOGLE_CLIENT_ID',
   'GOOGLE_CLIENT_SECRET',
+  'GOOGLE_SPREADSHEET_ID',
   'APP_ID',
   'APP_SECRET',
   'VERIFY_TOKEN',
@@ -17,6 +18,9 @@ type EnvVar = string | undefined;
 type Port = string | number | undefined;
 
 type Config = {
+  GoogleSpreadsheetId: EnvVar;
+  apiPrefix: EnvVar;
+  apiVersion: EnvVar;
   host: EnvVar;
   GoogleApiDomain: EnvVar;
   GoogleApiVersion: EnvVar;
@@ -26,12 +30,15 @@ type Config = {
   port: Port;
   appUrl: Origin;
   apiUrl: EnvVar;
-  GoogleApiUrl: EnvVar;
+  GoogleApiUrl: Origin;
   redirectUri: EnvVar;
   checkEnvVariables: Function;
 };
 
 const config: Config = {
+  GoogleSpreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
+  apiPrefix: 'api',
+  apiVersion: 'v1',
   appPort: process.env.APP_PORT || 3000,
   host: 'http://localhost',
   GoogleApiDomain: 'https://www.googleapis.com/auth',
@@ -47,8 +54,8 @@ const config: Config = {
   get apiUrl() {
     return `${this.host}:${this.port}`;
   },
-  get GoogleApiUrl() {
-    return `${this.GoogleApiDomain}/`;
+  get GoogleApiUrl(): Origin {
+    return `${this.GoogleApiDomain}`;
   },
   checkEnvVariables: function () {
     ENV_VARS.forEach(function (key) {
