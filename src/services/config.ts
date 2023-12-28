@@ -1,61 +1,46 @@
-/**
- * Source: https://github.com/fbsamples/original-coast-clothing/blob/main/services/config.js
- */
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const ENV_VARS = [
-  'PAGE_ID',
+  'GOOGLE_CLIENT_ID',
+  'GOOGLE_CLIENT_SECRET',
   'APP_ID',
-  'PAGE_ACCESS_TOKEN',
   'APP_SECRET',
   'VERIFY_TOKEN',
   'APP_URL',
-  'SHOP_URL',
 ];
 
 type EnvVar = string | undefined;
 type Port = string | number | undefined;
 
 type Config = {
-  apiDomain: EnvVar;
-  apiVersion: EnvVar;
-  pageId: EnvVar;
-  appId: EnvVar;
-  pageAccessToken: EnvVar;
-  appSecret: EnvVar;
-  verifyToken: EnvVar;
+  GoogleApiDomain: EnvVar;
+  GoogleApiVersion: EnvVar;
+  GoogleClientSecret: EnvVar;
+  GoogleClientId: EnvVar;
   appUrl: EnvVar;
-  pageUrl: EnvVar;
   port: Port;
   apiUrl: EnvVar;
-  webhookUrl: EnvVar;
+  redirectUri: EnvVar;
   whitelistedDomains: EnvVar[];
   checkEnvVariables: Function;
 };
 
 const config: Config = {
-  apiDomain: 'https://graph.facebook.com',
-  apiVersion: 'v11.0',
-  pageId: process.env.PAGE_ID,
-  appId: process.env.APP_ID,
-  pageAccessToken: process.env.PAGE_ACCESS_TOKEN,
-  appSecret: process.env.APP_SECRET,
-  verifyToken: process.env.VERIFY_TOKEN,
+  GoogleApiDomain: 'https://graph.facebook.com',
+  GoogleApiVersion: 'v11.0',
+  GoogleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  GoogleClientId: process.env.GOOGLE_CLIENT_ID,
+  redirectUri: process.env.GOOGLE_REDIRECT_URI,
   appUrl: process.env.APP_URL,
-  pageUrl: process.env.PAGE_URL,
   port: process.env.PORT || 3000,
 
   get apiUrl() {
-    return `${this.apiDomain}/${this.apiVersion}`;
-  },
-
-  get webhookUrl() {
-    return `${this.appUrl}/webhook`;
+    return `${this.GoogleApiDomain}/${this.GoogleApiVersion}`;
   },
   get whitelistedDomains() {
-    return [this.appUrl, this.pageUrl];
+    return [this.appUrl];
   },
 
   checkEnvVariables: function () {
