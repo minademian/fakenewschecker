@@ -19,6 +19,7 @@ type Port = string | number | undefined;
 
 type Config = {
   GoogleSpreadsheetId: EnvVar;
+  GoogleSpreadsheetRange: EnvVar;
   apiPrefix: EnvVar;
   apiVersion: EnvVar;
   host: EnvVar;
@@ -37,6 +38,7 @@ type Config = {
 
 const config: Config = {
   GoogleSpreadsheetId: process.env.GOOGLE_SPREADSHEET_ID,
+  GoogleSpreadsheetRange: process.env.GOOGLE_SPREADSHEET_RANGE,
   apiPrefix: 'api',
   apiVersion: 'v1',
   appPort: process.env.APP_PORT || 3000,
