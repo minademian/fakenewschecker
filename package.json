@@ -28,7 +28,8 @@
     "graph-api": "^1.0.5",
     "i18n": "^0.15.1",
     "install": "^0.13.0",
-    "node-fetch": "2"
+    "node-fetch": "2",
+    "tldts": "^6.1.1"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.23.3",
