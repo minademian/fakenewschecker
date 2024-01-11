@@ -182,3 +182,4 @@ nx.json
 client.json
 token.json
 credentials.json
+data*.json
