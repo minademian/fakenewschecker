@@ -147,6 +147,7 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
+.env
 
 # IDE - VSCode
 .vscode/*
@@ -169,11 +170,14 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# NX-specific files
 .nx/cache
 
 .gitkeep
 token.json
 .cache_ggshield
+
+# GCP files
 client.json
 token.json
 credentials.json
