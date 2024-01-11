@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '../app';
 
-let req = request(app);
+const req = request(app);
 
 describe('System routes', () => {
   it('root route should return 200', async () => {
