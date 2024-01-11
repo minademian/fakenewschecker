@@ -3,20 +3,29 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev": "nx run-many --parallel --target=serve --projects=chatbot,api",
+    "fe": "p nx serve chatbot",
+    "be": "p nx serve api"
   },
   "private": true,
   "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
     "@swc/helpers": "~0.5.2",
     "axios": "^1.0.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.1",
+    "google-auth-library": "^9.4.2",
+    "googleapis": "^130.0.0",
+    "nock": "^13.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-is": "18.2.0",
     "styled-components": "5.3.6",
     "supertest": "^6.3.3",
+    "tldts": "^6.1.2",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
