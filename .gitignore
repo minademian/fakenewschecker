@@ -176,6 +176,7 @@ Thumbs.db
 .gitkeep
 token.json
 .cache_ggshield
+nx.json
 
 # GCP files
 client.json
