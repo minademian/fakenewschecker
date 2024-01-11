@@ -11,11 +11,13 @@ const ENV_VARS = [
   'VERIFY_TOKEN',
   'APP_URL',
   'APP_PORT',
+  'SESSION_SECRET',
 ];
 
 type Origin = string | boolean | RegExp;
 type EnvVar = string | undefined;
 type Port = string | number | undefined;
+type EnvVarsFn = () => void;
 
 type Config = {
   GoogleSpreadsheetId: EnvVar;
@@ -33,7 +35,9 @@ type Config = {
   apiUrl: EnvVar;
   GoogleApiUrl: Origin;
   redirectUri: EnvVar;
-  checkEnvVariables: Function;
+  checkEnvVariables: EnvVarsFn;
+  SessionSecret: EnvVar;
+  ApiStorePrefix: EnvVar;
 };
 
 const config: Config = {
@@ -49,7 +53,8 @@ const config: Config = {
   GoogleClientId: process.env.GOOGLE_CLIENT_ID,
   redirectUri: process.env.GOOGLE_REDIRECT_URI,
   port: process.env.PORT || 8000,
-
+  SessionSecret: process.env.SESSION_SECRET,
+  ApiStorePrefix: process.env.API_STORE_PREFIX,
   get appUrl(): Origin {
     return `${this.host}:${this.appPort}`;
   },
@@ -59,7 +64,7 @@ const config: Config = {
   get GoogleApiUrl(): Origin {
     return `${this.GoogleApiDomain}`;
   },
-  checkEnvVariables: function () {
+  checkEnvVariables(): void {
     ENV_VARS.forEach(function (key) {
       if (!process.env[key]) {
         console.warn('WARNING: Missing the environment variable ' + key);
