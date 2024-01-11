@@ -24,7 +24,8 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "chatbot:build"
+        "buildTarget": "chatbot:build",
+        "proxyConfig": "apps/chatbot/proxy.conf.json"
       },
       "configurations": {
         "development": {

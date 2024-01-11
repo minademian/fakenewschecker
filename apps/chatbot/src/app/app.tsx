@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import NxWelcome from './nx-welcome';
+import { TextField, SubmitButton, Heading } from '@newssifter/ui';
 
 const StyledApp = styled.div`
   // Your style here
@@ -9,7 +9,9 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <StyledApp>
-      <NxWelcome title="chatbot" />
+      <Heading></Heading>
+      <TextField></TextField>
+      <SubmitButton></SubmitButton>
     </StyledApp>
   );
 }
