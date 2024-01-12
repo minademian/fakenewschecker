@@ -32,6 +32,8 @@ const limiter = rateLimit({
   // TODO: refactor with a lib that's compatible with both limiter and express
 });
 
+config.checkEnvVariables();
+
 app.use(
   bodyParser.json({
     limit: '8mb',

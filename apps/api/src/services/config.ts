@@ -6,12 +6,9 @@ const ENV_VARS = [
   'GOOGLE_CLIENT_ID',
   'GOOGLE_CLIENT_SECRET',
   'GOOGLE_SPREADSHEET_ID',
-  'APP_ID',
-  'APP_SECRET',
   'VERIFY_TOKEN',
-  'APP_URL',
-  'APP_PORT',
   'SESSION_SECRET',
+  'API_STORE_PREFIX',
 ];
 
 type Origin = string | boolean | RegExp;
@@ -69,7 +66,7 @@ const config: Config = {
       if (!process.env[key]) {
         console.warn('WARNING: Missing the environment variable ' + key);
       } else {
-        if (['APP_URL', 'SHOP_URL'].includes(key)) {
+        if (['APP_URL'].includes(key)) {
           const url: string = process.env[key] as string;
           if (!url.startsWith('https://')) {
             console.warn(
