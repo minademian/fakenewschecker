@@ -6,16 +6,15 @@ const ENV_VARS = [
   'GOOGLE_CLIENT_ID',
   'GOOGLE_CLIENT_SECRET',
   'GOOGLE_SPREADSHEET_ID',
-  'APP_ID',
-  'APP_SECRET',
   'VERIFY_TOKEN',
-  'APP_URL',
-  'APP_PORT',
+  'SESSION_SECRET',
+  'API_STORE_PREFIX',
 ];
 
 type Origin = string | boolean | RegExp;
 type EnvVar = string | undefined;
 type Port = string | number | undefined;
+type EnvVarsFn = () => void;
 
 type Config = {
   GoogleSpreadsheetId: EnvVar;
@@ -33,7 +32,9 @@ type Config = {
   apiUrl: EnvVar;
   GoogleApiUrl: Origin;
   redirectUri: EnvVar;
-  checkEnvVariables: Function;
+  checkEnvVariables: EnvVarsFn;
+  SessionSecret: EnvVar;
+  ApiStorePrefix: EnvVar;
 };
 
 const config: Config = {
@@ -49,7 +50,8 @@ const config: Config = {
   GoogleClientId: process.env.GOOGLE_CLIENT_ID,
   redirectUri: process.env.GOOGLE_REDIRECT_URI,
   port: process.env.PORT || 8000,
-
+  SessionSecret: process.env.SESSION_SECRET,
+  ApiStorePrefix: process.env.API_STORE_PREFIX,
   get appUrl(): Origin {
     return `${this.host}:${this.appPort}`;
   },
@@ -59,12 +61,12 @@ const config: Config = {
   get GoogleApiUrl(): Origin {
     return `${this.GoogleApiDomain}`;
   },
-  checkEnvVariables: function () {
+  checkEnvVariables(): void {
     ENV_VARS.forEach(function (key) {
       if (!process.env[key]) {
         console.warn('WARNING: Missing the environment variable ' + key);
       } else {
-        if (['APP_URL', 'SHOP_URL'].includes(key)) {
+        if (['APP_URL'].includes(key)) {
           const url: string = process.env[key] as string;
           if (!url.startsWith('https://')) {
             console.warn(
