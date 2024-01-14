@@ -5,8 +5,8 @@
   "scripts": {
     "prepare": "husky install",
     "dev": "nx run-many --parallel --target=serve --projects=chatbot,api",
-    "fe": "p nx serve chatbot",
-    "be": "p nx serve api"
+    "fe": "nx serve chatbot",
+    "be": "nx serve api"
   },
   "private": true,
   "dependencies": {
