@@ -47,6 +47,16 @@
       "options": {
         "jestConfig": "apps/api/jest.config.ts"
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": ""
+      },
+      "production": {
+        "buildTarget": "api:build:production"
+      }
     }
   },
   "tags": []
