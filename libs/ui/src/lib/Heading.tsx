@@ -10,7 +10,9 @@ const StyledHeading = styled.div`
 export function Heading(props: HeadingProps) {
   return (
     <StyledHeading>
-      <h1>News Sifter</h1>
+      <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+        News Sifter
+      </h1>
     </StyledHeading>
   );
 }
