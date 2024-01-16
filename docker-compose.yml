@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  newssifter-chatbot:
+    image: newssifter-chatbot:main
+    ports:
+      - 8080:80
+
+  newssifter-api:
+    image: newssifter-api:main
+    ports:
+      - 3333:3333
+    env_file:
+      - .env
