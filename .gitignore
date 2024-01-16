@@ -183,6 +183,7 @@ client.json
 token.json
 credentials.json
 data*.json
+k8s/*-configmap.yaml
 
 # Redis
 dump.rdb
