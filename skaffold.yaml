@@ -1,0 +1,24 @@
+apiVersion: skaffold/v4beta8
+kind: Config
+metadata:
+  name: newssifter
+build:
+  artifacts:
+    - image: newssifter-api
+      context: apps/api
+      docker:
+        dockerfile: Dockerfile
+    - image: newssifter-chatbot
+      context: apps/chatbot
+      docker:
+        dockerfile: Dockerfile
+  tagPolicy:
+    sha256: {}
+manifests:
+  rawYaml:
+    - k8s/newssifter--env-configmap.yaml
+    - k8s/newssifter-api-deployment.yaml
+    - k8s/newssifter-api-service.yaml
+    - k8s/newssifter-chatbot-deployment.yaml
+    - k8s/newssifter-chatbot-service.yaml
+    - k8s/newssifter-configmap.yaml
