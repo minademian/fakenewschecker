@@ -183,6 +183,8 @@ client.json
 token.json
 credentials.json
 data*.json
+k8s/*-configmap.yaml
+k8s/newssifter-api-deployment.yaml
 
 # Redis
 dump.rdb
